@@ -139,3 +139,24 @@ const getVerse = () => {
   Parent.replaceChildren(Book, Div);
 };
 document.getElementById("newverse").addEventListener("click", getVerse);
+
+// document.getElementById("verse-form").addEventListener("submit", function(event) {
+//     event.preventDefault();
+//     const verseInput = document.getElementById("verse-input").value;
+//     if (verseInput) {
+//         // Here you would typically look up the verse in your data
+//         // For demonstration, we'll just log it to the console
+//         console.log("User entered verse reference:", verseInput);
+//         // You can implement a function to find and display the verse based on user input
+//     }
+// });
+import { saveData, loadData } from './storage.js';
+
+const localStorageKey = 'scriptureMemoryData';
+
+// Example usage of saveData and loadData
+const exampleData = { lastViewedVerse: 'John 3:16' };
+saveData(exampleData);
+
+const retrievedData = loadData();
+console.log('Retrieved Data:', retrievedData);

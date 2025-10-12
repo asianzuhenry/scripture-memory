@@ -19,6 +19,14 @@
     <hr>
     <button id="newverse">Get Verse</button>
     <p class="instructions">Click the 'Get Verse' button to display a new verse...</p>
-    <script src="app.js"></script>
+    <form id="verse-form">
+        <input type="text" id="book-reference" placeholder="Enter book name (e.g., John)">
+        <input type="text" id="verse-input" placeholder="Enter your own verse reference">
+        <input type="text" id="verse-content" placeholder="Enter your own verse content">
+        <button type="submit">Submit</button>
+    </form>
+    <p class="instructions">...or enter your own verse reference in the input box above.</p>
+    <script type="module" src="app.js"></script>
+    <!-- <script type="module" src="storage.js"></script> -->
 </body>
 </html>

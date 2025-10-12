@@ -70,3 +70,12 @@ button {
     margin-top: 10px;
     text-align: center;
 }
+
+/* form styles */
+form {
+    background-color: #007BFF;
+}
+
+input {
+    padding: 8px;
+}
