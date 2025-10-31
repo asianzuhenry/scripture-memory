@@ -164,6 +164,61 @@ const getVerse = () => {
   Div.replaceChildren(Topic, Reference, Content);
   Parent.replaceChildren(Book, Div);
 };
+
+const pList = document.getElementById("participant-list");
+
+if (pList.innerHTML === "") {
+  pList.className = "no-participants";
+  pList.innerText = "No participants added yet.";
+} else {
+  pList.className = "participant-table";
+}
+
+const addParticipant = () => {
+  const addParticipantButton = document.getElementById("addparticipant");
+  
+  addParticipantButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent form submission behavior and page reload
+
+    const participantInput = document.getElementById("participant");
+    const participantNameValue = participantInput.value.trim();
+
+    if (participantNameValue !== "") {
+      // table logic to add participant
+      const participantList = document.getElementById("participant-list") || (() => {
+        const table = document.createElement("table");
+        table.id = "participant-table";
+        const headerRow = document.createElement("tr");
+        const nameHeader = document.createElement("th");
+        const scoreHeader = document.createElement("th");
+        nameHeader.innerText = "Participant Name";
+        scoreHeader.innerText = "Score";
+        headerRow.appendChild(nameHeader);
+        headerRow.appendChild(scoreHeader);
+        table.appendChild(headerRow);
+        document.getElementById("participant-list").appendChild(table);
+        return table;
+      })();
+      const participantTr = document.createElement("tr");
+      const participantNameElement = document.createElement("td");
+      const participantScoreElement = document.createElement("td");
+      participantNameElement.innerText = participantNameValue;
+      participantScoreElement.innerText = "0"; // Default score
+
+      participantTr.className = "participant";
+      participantNameElement.className = "participant-name";
+      participantScoreElement.className = "participant-score";
+
+      participantTr.appendChild(participantNameElement);
+      participantTr.appendChild(participantScoreElement);
+      participantList.appendChild(participantTr);
+      participantInput.value = "";
+      }
+  });
+}
+
+addParticipant();
+
 document.getElementById("newverse").addEventListener("click", getVerse);
 
 // import { saveData, loadData } from "./storage.js";
