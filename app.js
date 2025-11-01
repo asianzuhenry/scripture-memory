@@ -205,6 +205,12 @@ const addParticipant = () => {
       participantNameElement.innerText = participantNameValue;
       participantScoreElement.innerText = "0"; // Default score
 
+      participantScoreElement.addEventListener("click", () => {
+        let currentScore = parseInt(participantScoreElement.innerText, 10);
+        currentScore += 1;
+        participantScoreElement.innerText = currentScore.toString();
+      });
+
       participantTr.className = "participant";
       participantNameElement.className = "participant-name";
       participantScoreElement.className = "participant-score";
