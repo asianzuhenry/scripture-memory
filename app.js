@@ -96,18 +96,33 @@ const data = [
   },
 ];
 
+let existingVerseList = [];
+let allVerses = [];
+let currentIndex = 0;
+
+const totalVerses = data.reduce((sum, book) => sum + book.verses.length, 0);
+
 const generateValues = () => {
+  if (existingVerseList.length === totalVerses) {
+    alert("All verses have been shown. Starting over.");
+    existingVerseList = [];
+  }
+
   let x = [];
-  const index = Math.floor(Math.random() * data.length);
+  while (true) {
+    const index = Math.floor(Math.random() * data.length);
+    const verseIndex = Math.floor(Math.random() * data[index].verses.length);
+    const verse = data[index].verses[verseIndex];
 
-  const verse = Math.floor(Math.random() * data[index].verses.length);
-
-  x.push(data[index].title, data[index].verses[verse]);
-
-  return x;
+    if (!existingVerseList.includes(verse.reference)) {
+      existingVerseList.push(verse.reference);
+      x.push(data[index].title, verse);
+      console.log(`${existingVerseList.length}/${totalVerses} verses shown`);
+      return x;
+    }
+  }
 };
 
-generateValues();
 
 const getElements = () => {
   let gen = generateValues();
@@ -176,7 +191,7 @@ if (pList.innerHTML === "") {
 
 const addParticipant = () => {
   const addParticipantButton = document.getElementById("addparticipant");
-  
+
   addParticipantButton.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent form submission behavior and page reload
 
@@ -185,20 +200,22 @@ const addParticipant = () => {
 
     if (participantNameValue !== "") {
       // table logic to add participant
-      const participantList = document.getElementById("participant-list") || (() => {
-        const table = document.createElement("table");
-        table.id = "participant-table";
-        const headerRow = document.createElement("tr");
-        const nameHeader = document.createElement("th");
-        const scoreHeader = document.createElement("th");
-        nameHeader.innerText = "Participant Name";
-        scoreHeader.innerText = "Score";
-        headerRow.appendChild(nameHeader);
-        headerRow.appendChild(scoreHeader);
-        table.appendChild(headerRow);
-        document.getElementById("participant-list").appendChild(table);
-        return table;
-      })();
+      const participantList =
+        document.getElementById("participant-list") ||
+        (() => {
+          const table = document.createElement("table");
+          table.id = "participant-table";
+          const headerRow = document.createElement("tr");
+          const nameHeader = document.createElement("th");
+          const scoreHeader = document.createElement("th");
+          nameHeader.innerText = "Participant Name";
+          scoreHeader.innerText = "Score";
+          headerRow.appendChild(nameHeader);
+          headerRow.appendChild(scoreHeader);
+          table.appendChild(headerRow);
+          document.getElementById("participant-list").appendChild(table);
+          return table;
+        })();
       const participantTr = document.createElement("tr");
       const participantNameElement = document.createElement("td");
       const participantScoreElement = document.createElement("td");
@@ -219,9 +236,9 @@ const addParticipant = () => {
       participantTr.appendChild(participantScoreElement);
       participantList.appendChild(participantTr);
       participantInput.value = "";
-      }
+    }
   });
-}
+};
 
 addParticipant();
 
