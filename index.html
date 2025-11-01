@@ -19,12 +19,27 @@
     <hr>
     <button id="newverse">Get Verse</button>
     <p class="instructions">Click the 'Get Verse' button to display a new verse...</p>
-    <form id="verse-form">
-        <input type="text" id="participant" placeholder="Add Participants name">
-        <button id="addparticipant" type="submit">Submit</button>
+    <form id="participant-form" name="participantform">
+        <input type="text" name="participant" id="participant" placeholder="Add Participants name">
+        <input id="addparticipant" value="Submit" type="button">
     </form>
     <p class="instructions">...add a participant in the input box above.</p>
+
+    <div id="participant-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Participant Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="participant-list">
+                <!-- Participant rows will be rendered here -->
+            </tbody>
+        </table>
+    </div>
+
     <script type="module" src="app.js"></script>
     <!-- <script type="module" src="storage.js"></script> -->
-</body>
+</body> 
 </html>
